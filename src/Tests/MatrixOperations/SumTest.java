@@ -1,29 +1,44 @@
 package Tests.MatrixOperations;
 
 import MatrixOperations.Sum;
-import Records.Matrix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static Tests.resources.toUseOnOperations.MatricesToUseOnSumationTests.*;
+
 public class SumTest {
-    static Matrix matrix1ToTest = new Matrix(new double[][]{
-            {3, 3.5, 4},
-            {3.4, 3.6, 5},
-            {5, 5.4, 5.6}
-    });
-    static Matrix matrix2ToTest = new Matrix(new double[][]{
-            {3, 3.5, 4},
-            {3.4, 3.6, 5},
-            {5, 5.4, 5.6}
-    });
+
     @Test
-    public void testSumBothMatrices(){
-        Matrix result = Sum.sumMatrices(matrix1ToTest, matrix2ToTest);
-        Matrix expectedMatrix = new Matrix(new double[][]{
-                {6, 7, 8},
-                {6.8, 7.2, 10},
-                {10, 10.8, 11.2}
-        });
-        Assertions.assertEquals(expectedMatrix, result);
+    public void testSumBothMatrices() throws Exception
+    {
+        Assertions.assertEquals(
+                expectedSumOfMatrices1ByItself,
+                Sum.sumMatrices(
+                        correctMatrix1,
+                        correctMatrix1
+                )
+        );
+    }
+    @Test
+    public void testSumWrongBothMatrices() throws Exception
+    {
+        Assertions.assertNotEquals(
+                correctMatrix3ThatIsntTheSumOfMatrices1And2,
+            Sum.sumMatrices(
+                correctMatrix1,
+                correctMatrix2
+            )
+        );
+    }
+    @Test
+    public void testThrowsExceptionWhenTryToSumMatricesWithDifferentInternalLengths()
+    {
+        Assertions.assertThrows(
+            Exception.class,
+            () -> Sum.sumMatrices(
+                correctMatrix1,
+                matrixWithWrongInternalLengths
+            )
+        );
     }
 }
