@@ -6,18 +6,31 @@ import java.util.Arrays;
 public record Matrix(
         double[][] rows
 ) {
+    public double[] column(int columnIndex){
+        var column = new double[rows().length];
+        for (int i = 0; i < rows().length; i++)
+            column[i] = rows()[i][columnIndex];
+        return column;
+    }
     @Override
     public boolean equals(Object obj) {
         if (obj == this)
             return true;
         if (!(obj instanceof Matrix))
             return false;
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++)
-                if (this.rows[i][j] != ((Matrix) obj).rows()[i][j])
+        return bothMatricesGotSameNumbers(
+                (Matrix) obj
+        );
+    }
+
+    private boolean bothMatricesGotSameNumbers(Matrix obj) {
+        for (int i = 0; i < this.rows().length; i++)
+            for (int j = 0; j < this.rows()[i].length; j++)
+                if (this.rows[i][j] != obj.rows()[i][j])
                     return false;
         return true;
     }
+
     private String getConcatenatedRow(StringBuilder stringBuilder, double[] rowToConcat){
         stringBuilder.append("{ ");
         for (double v : rowToConcat)
@@ -31,11 +44,13 @@ public record Matrix(
     }
     @Override
     public String toString() {
-        var stringedRows = new String[rows().length];
-        for (int i = 0; i < rows().length; i++)
-            stringedRows[i] = getConcatenatedRow(new StringBuilder(), rows()[i]);
+        var rowsToHandle = rows().clone();
+        var stringedRows = new String[rowsToHandle.length];
+        for (int i = 0; i < rowsToHandle.length; i++)
+            stringedRows[i] = getConcatenatedRow(new StringBuilder(), rowsToHandle[i]);
         return "Matrix{" +
                 Arrays.stream(stringedRows).reduce(String::concat).orElseThrow() +
                 '}';
     }
+
 }

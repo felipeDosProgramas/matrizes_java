@@ -4,7 +4,7 @@ import Records.Matrix;
 import Tests.resources.MatricesToUseOnTests;
 
 public class MatricesToUseOnSumationTests extends MatricesToUseOnTests {
-    public static Matrix expectedSumOfMatrices1ByItself = new Matrix(new double[][]{
+    public static Matrix expectedSumOfMatrix1ByItself = new Matrix(new double[][]{
             {6, 7, 8},
             {6.8, 7.2, 10},
             {10, 10.8, 11.2}

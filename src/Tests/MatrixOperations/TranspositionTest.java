@@ -10,11 +10,10 @@ public class TranspositionTest {
 
     @Test
     public void testCorrectTransposition(){
-        System.out.println(transposedMatrix1.toString());
         Assertions.assertEquals(
             transposedMatrix1,
             Transposition.revert(
-                correctMatrix1
+                    getCorrectMatrix1()
             )
         );
     }

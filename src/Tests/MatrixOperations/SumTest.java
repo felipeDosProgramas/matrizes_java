@@ -12,10 +12,10 @@ public class SumTest {
     public void testSumBothMatrices() throws Exception
     {
         Assertions.assertEquals(
-                expectedSumOfMatrices1ByItself,
+                expectedSumOfMatrix1ByItself,
                 Sum.sumMatrices(
-                        correctMatrix1,
-                        correctMatrix1
+                        getCorrectMatrix1(),
+                        getCorrectMatrix1()
                 )
         );
     }
@@ -25,8 +25,8 @@ public class SumTest {
         Assertions.assertNotEquals(
                 correctMatrix3ThatIsntTheSumOfMatrices1And2,
             Sum.sumMatrices(
-                correctMatrix1,
-                correctMatrix2
+                    getCorrectMatrix1(),
+                    correctMatrix2
             )
         );
     }
@@ -36,8 +36,8 @@ public class SumTest {
         Assertions.assertThrows(
             Exception.class,
             () -> Sum.sumMatrices(
-                correctMatrix1,
-                matrixWithWrongInternalLengths
+                    getCorrectMatrix1(),
+                    matrixWithWrongInternalLengths
             )
         );
     }
