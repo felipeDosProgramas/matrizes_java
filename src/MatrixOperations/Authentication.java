@@ -25,10 +25,21 @@ public class Authentication implements Operation {
         if(indexOfUserOnArrayOfUsers == -1)
             return false;
         return loginData.get("password")
-                .get(indexOfUserOnArrayOfUsers).equals(password);
+                .get(indexOfUserOnArrayOfUsers)
+                .equals(password);
     }
-    public static boolean execute(Scanner scanner){
-        return new Authentication()
-                .auth(scanner.nextLine(), scanner.nextLine());
+    private static String authUser(Authentication authentication, Scanner scanner){
+        String user;
+        System.out.println("Type your username and password");
+        return authentication.auth(user = scanner.nextLine(), scanner.nextLine())
+                ? "welcome " + user
+                : authUser(authentication, scanner);
+    }
+    public static void execute(Scanner scanner){
+        scanner.nextLine();
+        Authentication authentication = new Authentication();
+        System.out.println(
+                authUser(authentication, scanner)
+        );
     }
 }
