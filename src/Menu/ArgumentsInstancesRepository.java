@@ -4,13 +4,12 @@ import java.util.Optional;
 
 import static Tests.resources.MatricesToUseOnTests.getCorrectMatrix1;
 
-public class ArgumentsHashMap {
+public class ArgumentsInstancesRepository {
 
     public static Optional<Object[]> getArgumentsInstancesByTypeClass(Class<?>[] parametersClasses) {
         Object[] instances = new Object[parametersClasses.length];
-        for (int i = 0; i < parametersClasses.length; i++) {
+        for (int i = 0; i < parametersClasses.length; i++)
             instances[i] = getInstanceByClassName(parametersClasses[i].getTypeName());
-        }
         return Optional.of(instances);
     }
 
