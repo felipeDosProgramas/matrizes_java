@@ -1,3 +1,5 @@
 package Interfaces;
 
-public interface Operation {}
+public interface Operation {
+
+}

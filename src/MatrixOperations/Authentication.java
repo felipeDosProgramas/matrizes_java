@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Authentication implements Operation {
     static Hashtable<String, List<String>> loginData = new Hashtable<>(2);
+
     Authentication(){
         loginData.put("user", List.of(new String[]{
                 "mariaGeneralAdm", "littleSergioKingOfThem", "AlessandroLyme",
@@ -17,6 +18,7 @@ public class Authentication implements Operation {
                 "WheresGenebra", "OnJavaItsDifferently", "GimmeUrCSharp"
         }));
     }
+
     public boolean auth(String user, String password){
         int indexOfUserOnArrayOfUsers = loginData
                 .get("user").indexOf(user);
@@ -25,9 +27,8 @@ public class Authentication implements Operation {
         return loginData.get("password")
                 .get(indexOfUserOnArrayOfUsers).equals(password);
     }
-    public static boolean execute(){
-        var scan = new Scanner(System.in);
+    public static boolean execute(Scanner scanner){
         return new Authentication()
-                .auth(scan.nextLine(), scan.nextLine());
+                .auth(scanner.nextLine(), scanner.nextLine());
     }
 }
