@@ -31,13 +31,9 @@ public class OperationsChooser {
     }
 
     public Optional<Object[]> getProperArgumentsInstances(Method method){
-        var paramTypes = method.getParameterTypes();
-        var paramTypesNames = new String[paramTypes.length];
-        var i = 0;
-        for (Class<?> paramType: paramTypes)
-            paramTypesNames[i++] = paramType.getTypeName();
-        return ArgumentsHashMap.getArgumentsInstances(
-                paramTypesNames
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        return ArgumentsHashMap.getArgumentsInstancesByTypeClass(
+                parameterTypes
         );
     }
 
@@ -59,7 +55,7 @@ public class OperationsChooser {
         );
         try {
             method.invoke(null, selfInstance.getProperArgumentsInstances(method).orElseThrow());
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchElementException e) {
             throw new RuntimeException(e);
         }
     }
