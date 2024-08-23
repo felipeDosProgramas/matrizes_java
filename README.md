@@ -7,6 +7,9 @@
 <p>Desenvolva um programa que realiza a soma de duas matrizes 3X3, exibindo o resultado no console.</p>
 
 ## Multiplicação de Matriz por Escalar:
+<p>Faça um programa que multiplique uma matriz por um número escalar ou por outra Matriz</p>
+
+## Autenticação baseada em matriz
 <p>Crie um programa que verifique se um login e senha confere com os dados de uma matriz 6x2.</p>
 
 ## Transposição de Matriz:
