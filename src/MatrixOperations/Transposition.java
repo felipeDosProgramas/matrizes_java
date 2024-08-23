@@ -1,8 +1,9 @@
 package MatrixOperations;
 
+import Interfaces.Operation;
 import Records.Matrix;
 
-public class Transposition {
+public class Transposition implements Operation {
     public static Matrix revert(Matrix matrix){
         var transposedMatrix = new Matrix(new double[matrix.rows().length][matrix.rows()[0].length]);
         for (int i = 0; i < matrix.rows().length; i++)

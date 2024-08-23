@@ -1,8 +1,9 @@
 package MatrixOperations;
 
+import Interfaces.Operation;
 import Records.Matrix;
 
-public class Sum {
+public class Sum implements Operation {
 
     static double[] sumRows(double[] row1, double[] row2){
         double[] resultantRow = new double[3];

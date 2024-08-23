@@ -1,10 +1,11 @@
 package MatrixOperations;
 
+import Interfaces.Operation;
 import Records.Matrix;
 
 import java.util.Arrays;
 
-public class Multiplication {
+public class Multiplication implements Operation {
 
     private static double getOperationsToDo(double[] row, double[] column){
         var multiplications = new double[row.length];
@@ -13,13 +14,7 @@ public class Multiplication {
         return Arrays.stream(multiplications.clone()).sum();
     }
 
-    /**
-     * INDIANO ME EXPLICA ISSO PFVRRR
-     * newMatrix[i][j] = matrix.rows()[i][j] * scalar;
-     * É DIFERENTE DE
-     * newMatrix = matrix.rows().clone();
-     * newMatrix[i][j] *= scalar;
-     */
+
     public static Matrix MatrixByScalar(Matrix matrix, double scalar){
         var newMatrix = new double[matrix.rows().length][matrix.rows()[0].length];
         for (int i = 0; i < matrix.rows().length; i++)
