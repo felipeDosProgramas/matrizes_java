@@ -1,19 +1,20 @@
 package Tests.MatrixOperations;
 
-import MatrixOperations.Multiplication;
+import MatrixOperations.Multiplication.MatrixByMatrix;
+import MatrixOperations.Multiplication.MatrixByScalar;
 import Records.Matrix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static Tests.resources.toUseOnOperations.MatricesToUseOnMultiplication.*;
 
-public class MultiplicationTest {
+public class MatrixByScalarTest {
 
     @Test
     public void testMultiplicationBtwMatrixAndScalar(){
         Assertions.assertEquals(
                 matrix1Times5,
-                Multiplication.MatrixByScalar(
+                MatrixByScalar.matrixByScalar(
                         getCorrectMatrix1(),
                         5
                 )
@@ -23,7 +24,7 @@ public class MultiplicationTest {
     public void testMultiplicationBtw2Matrices(){
         Assertions.assertEquals(
                 matrix1TimesMatrix2,
-                Multiplication.MatrixByMatrix(
+                MatrixByMatrix.matrixByMatrix(
                         getCorrectMatrix1(),
                         correctMatrix2
                 )
@@ -33,7 +34,7 @@ public class MultiplicationTest {
     public void testWrongMultiplicationBtwMatrixAndScalar(){
         Assertions.assertNotEquals(
                 matrix1Times5,
-                Multiplication.MatrixByScalar(
+                MatrixByScalar.matrixByScalar(
                         new Matrix(getCorrectMatrix1().rows().clone()),
                         4
                 )
@@ -43,7 +44,7 @@ public class MultiplicationTest {
     public void testWrongMultiplicationBtw2Matrices(){
         Assertions.assertNotEquals(
                 matrix1TimesMatrix2,
-                Multiplication.MatrixByMatrix(
+                MatrixByMatrix.matrixByMatrix(
                         getCorrectMatrix1(),
                         getCorrectMatrix1()
                 )
