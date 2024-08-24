@@ -16,7 +16,7 @@ public class ArgumentsInstancesRepository {
     private static Object getInstanceByClassName(String typeName) {
         return switch (typeName){
             case "Records.Matrix" -> getCorrectMatrix1();
-            case "java.util.Scanner" -> OperationsChooser.scanner;
+            case "java.util.Scanner" -> OperationChooser.scanner;
             case "double" -> (double) 0;
             default -> null;
         };

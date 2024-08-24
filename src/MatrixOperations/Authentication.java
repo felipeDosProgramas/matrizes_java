@@ -9,14 +9,16 @@ public class Authentication implements Operation {
     static Hashtable<String, List<String>> loginData = new Hashtable<>(2);
 
     Authentication(){
-        loginData.put("user", List.of(new String[]{
-                "mariaGeneralAdm", "littleSergioKingOfThem", "AlessandroLyme",
-                "genebraNeedUs", "SenacBetterThanFortec", "GilmarLikesCSharp"
-        }));
-        loginData.put("password", List.of(new String[]{
-                "Mary123", "TinySergio", "2Girls1Boy(Married and with a daughter)",
-                "WheresGenebra", "OnJavaItsDifferently", "GimmeUrCSharp"
-        }));
+        if (!loginData.contains("user"))
+            loginData.put("user", List.of(new String[]{
+                    "mariaGeneralAdm", "littleSergioKingOfThem", "AlessandroLyme",
+                    "genebraNeedUs", "SenacBetterThanFortec", "GilmarLikesCSharp"
+            }));
+        if(!loginData.contains("password"))
+            loginData.put("password", List.of(new String[]{
+                    "Mary123", "TinySergio", "2Girls1Boy(Married and with a daughter)",
+                    "WheresGenebra", "OnJavaItsDifferently", "GimmeUrCSharp"
+            }));
     }
 
     public boolean auth(String user, String password){

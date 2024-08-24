@@ -8,17 +8,17 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class OperationCaller {
-    private final OperationsChooser operationsChooser;
+    private final OperationChooser operationChooser;
 
-    public OperationCaller(OperationsChooser operationsChooser) {
-        this.operationsChooser = operationsChooser;
+    public OperationCaller(OperationChooser operationChooser) {
+        this.operationChooser = operationChooser;
     }
 
     private Matrix invokeMethod(Method method)
             throws InvocationTargetException, IllegalAccessException, NoSuchElementException
     {
         return (Matrix) method.invoke(null,
-                operationsChooser
+                operationChooser
                         .getProperArgumentsInstances(method)
                         .orElseThrow()
         );
@@ -29,12 +29,12 @@ public class OperationCaller {
         if (method.getReturnType() == Matrix.class)
             return false;
         method.invoke(null,
-            operationsChooser
-                    .getProperArgumentsInstances(method)
+            operationChooser.getProperArgumentsInstances(method)
                     .orElseThrow()
         );
         return true;
     }
+
     public Optional<Matrix> execute(Method method){
         try {
             if(invokeMethodWithoutReturn(method))

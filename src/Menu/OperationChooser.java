@@ -9,9 +9,9 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class OperationsChooser {
+public class OperationChooser {
     public static final Scanner scanner = new Scanner(System.in);
-    private static OperationsChooser selfInstance = null;
+    private static OperationChooser selfInstance = null;
 
     public List<Class<? extends Operation>> operations = List.of(
             Authentication.class,
@@ -20,13 +20,23 @@ public class OperationsChooser {
             MatrixByScalar.class,
             MatrixByMatrix.class
     );
-    public static OperationsChooser getInstance(){
+    public static OperationChooser getInstance(){
         if (selfInstance == null)
-            selfInstance = new OperationsChooser();
+            selfInstance = new OperationChooser();
         return selfInstance;
     }
-    private Class<? extends Operation> getOperationToExecute(){
+    private void printMenu(){
         System.out.println("choose a number between 0 and 4");
+        System.out.println(
+                "0 - Authentication with username and password \n" +
+                "1 - Sum between two matrices \n" +
+                "2 - Matrix transposition \n" +
+                "3 - Product between a Matrix and a scalar \n" +
+                "4 - Product between two Matrices"
+        );
+    }
+    private Class<? extends Operation> getOperationToExecute(){
+        printMenu();
         try
             { return operations.get(scanner.nextInt()); }
         catch (IndexOutOfBoundsException _)
@@ -39,20 +49,21 @@ public class OperationsChooser {
                 parameterTypes
         );
     }
-
+    private Predicate<? super Method> isMethodPublicAndStatic(){
+        return (method) -> Modifier.isStatic(method.getModifiers())
+                && Modifier.isPublic(method.getModifiers());
+    }
     public Method getEntryPointMethodFromOperation(Class<? extends Operation> chosenOperation){
-        Predicate<? super Method> isMethodPublicAndStatic = m ->
-                Modifier.isStatic(m.getModifiers()) &&
-                Modifier.isPublic(m.getModifiers());
         return Arrays.stream(chosenOperation.getDeclaredMethods())
-                .filter(isMethodPublicAndStatic)
-                .findFirst().orElseThrow();
+                .filter(isMethodPublicAndStatic())
+                .findFirst()
+                .orElseThrow();
     }
 
     public static Method chooseOperation(){
-        OperationsChooser operationsChooserInstance = getInstance();
-        return operationsChooserInstance.getEntryPointMethodFromOperation(
-                operationsChooserInstance.getOperationToExecute()
+        OperationChooser operationChooserInstance = getInstance();
+        return operationChooserInstance.getEntryPointMethodFromOperation(
+                operationChooserInstance.getOperationToExecute()
         );
     }
 }

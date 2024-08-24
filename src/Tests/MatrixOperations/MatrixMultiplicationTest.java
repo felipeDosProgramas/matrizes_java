@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static Tests.resources.toUseOnOperations.MatricesToUseOnMultiplication.*;
 
-public class MatrixByScalarTest {
+public class MatrixMultiplicationTest {
 
     @Test
     public void testMultiplicationBtwMatrixAndScalar(){
