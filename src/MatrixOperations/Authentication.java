@@ -37,6 +37,7 @@ public class Authentication implements Operation {
                 ? "welcome " + user
                 : authUser(authentication, scanner);
     }
+
     public static void execute(Scanner scanner){
         scanner.nextLine();
         Authentication authentication = new Authentication();

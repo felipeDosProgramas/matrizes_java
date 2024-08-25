@@ -1,55 +1,60 @@
 package Menu;
 
+import LogsManager.LOG;
+import LogsManager.LogsLocationHandler;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.Instant;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.Stack;
 
-public class OperationObjectsRegister {
-    private final int operationId = ((int) log.get("operationsLastInsertedId")) + 1;
-    private final Date operatedAt = Date.from(Instant.now());
-    private final HashSet<String> usedObjectsNames = new HashSet<>();
-    private static final HashSet<OperationObjectsRegister> operationObjectsRegisterInstance = new HashSet<>();
-    static JSONObject log;
+class OperationObjectsRegister {
+    protected static final Stack<OperationIdentifier> operationIdentifiersStack = new Stack<>();
 
-    private static String getLogFileContents(){
-        var file = new StringBuilder();
-        var scanner = new Scanner("../Log.json");
-        while (scanner.hasNextLine())
-            file.append(scanner.nextLine()).append(System.lineSeparator());
-        return file.toString();
-    }
-    private static void parseJsonContents(String fileContents){
+    private static Object parseJsonContents(String fileContents)
+    {
         try {
-            log = (JSONObject) new JSONParser().parse(fileContents);
+            return new JSONParser().parse(fileContents);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public static OperationObjectsRegister getOperationObjectsRegisterInstance() {
-        OperationObjectsRegister operation = new OperationObjectsRegister();
-        operationObjectsRegisterInstance.add(operation);
-        return operation;
+    @SuppressWarnings("unchecked")
+    protected static long getNewOperationId(){
+        long lastInsertedId;
+        JSONObject operationsIdentifierLog = (JSONObject) parseJsonContents(
+                LogsLocationHandler.readFromLog(LOG.OPERATIONS_IDENTIFIERS)
+        );
+        operationsIdentifierLog.put(
+                "lastInsertedId",
+                lastInsertedId = 1 + (long) operationsIdentifierLog.get("lastInsertedId")
+        );
+        LogsLocationHandler.writeOnLog(
+                operationsIdentifierLog.toJSONString(),
+                LOG.OPERATIONS_IDENTIFIERS
+        );
+        return lastInsertedId;
     }
+    @SuppressWarnings("unchecked")
+    public static void  addOperatedObjectsToLogInstance(){
+        JSONObject operationsLog = (JSONObject) parseJsonContents(
+                LogsLocationHandler.readFromLog(LOG.OPERATIONS)
+        );
 
-    public void setUsedObjectName(String objectName){
-        usedObjectsNames.add(objectName);
-    }
+        var operationsArray = (JSONArray) operationsLog.get("executedOperations");
 
-    public void dispatchOperationDataOnLogFile(){
-        try(var writer = new BufferedWriter(new FileWriter("../Log.json"))) {
-            writer.write(log.toJSONString());
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        operationsArray.addAll(
+                operationIdentifiersStack.stream()
+                        .map(OperationIdentifier::getOperationData)
+                        .toList()
+        );
+
+        operationsLog.put("executedOperations", operationsArray);
+
+        LogsLocationHandler.writeOnLog(
+                operationsLog.toJSONString(),
+                LOG.OPERATIONS
+        );
     }
 }

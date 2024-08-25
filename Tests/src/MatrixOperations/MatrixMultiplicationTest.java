@@ -1,4 +1,4 @@
-package Tests.MatrixOperations;
+package MatrixOperations;
 
 import MatrixOperations.Multiplication.MatrixByMatrix;
 import MatrixOperations.Multiplication.MatrixByScalar;
@@ -6,7 +6,10 @@ import Records.Matrix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static Tests.resources.toUseOnOperations.MatricesToUseOnMultiplication.*;
+import static toUseOnOperations.MatricesToUseOnMultiplication.matrix1Times5;
+import static toUseOnOperations.MatricesToUseOnMultiplication.matrix1TimesMatrix2;
+import static toUseOnOperations.MatricesToUseOnTests.correctMatrix2;
+import static toUseOnOperations.MatricesToUseOnTests.getCorrectMatrix1;
 
 public class MatrixMultiplicationTest {
 

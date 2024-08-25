@@ -20,6 +20,7 @@ public class OperationChooser {
             MatrixByScalar.class,
             MatrixByMatrix.class
     );
+    private OperationChooser(){}
     public static OperationChooser getInstance(){
         if (selfInstance == null)
             selfInstance = new OperationChooser();
@@ -27,13 +28,13 @@ public class OperationChooser {
     }
     private void printMenu(){
         System.out.println("choose a number between 0 and 4");
-        System.out.println(
-                "0 - Authentication with username and password \n" +
-                "1 - Sum between two matrices \n" +
-                "2 - Matrix transposition \n" +
-                "3 - Product between a Matrix and a scalar \n" +
-                "4 - Product between two Matrices"
-        );
+        System.out.println("""
+                0 - Authentication with username and password\s
+                1 - Sum between two matrices\s
+                2 - Matrix transposition\s
+                3 - Product between a Matrix and a scalar\s
+                4 - Product between two Matrices
+        """);
     }
     private Class<? extends Operation> getOperationToExecute(){
         printMenu();
@@ -43,16 +44,19 @@ public class OperationChooser {
             { return getOperationToExecute(); }
     }
 
-    public Optional<Object[]> getProperArgumentsInstances(Method method){
+    public Object[] getProperArgumentsInstances(Method method){
         Class<?>[] parameterTypes = method.getParameterTypes();
         return ArgumentsInstancesRepository.getArgumentsInstancesByTypeClass(
                 parameterTypes
         );
     }
+
     private Predicate<? super Method> isMethodPublicAndStatic(){
         return (method) -> Modifier.isStatic(method.getModifiers())
                 && Modifier.isPublic(method.getModifiers());
     }
+
+    /** The entry point method of an operation is the only public and static method. */
     public Method getEntryPointMethodFromOperation(Class<? extends Operation> chosenOperation){
         return Arrays.stream(chosenOperation.getDeclaredMethods())
                 .filter(isMethodPublicAndStatic())

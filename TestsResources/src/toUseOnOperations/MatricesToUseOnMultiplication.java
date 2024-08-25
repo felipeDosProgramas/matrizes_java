@@ -1,7 +1,6 @@
-package Tests.resources.toUseOnOperations;
+package toUseOnOperations;
 
 import Records.Matrix;
-import Tests.resources.MatricesToUseOnTests;
 
 public class MatricesToUseOnMultiplication extends MatricesToUseOnTests {
 

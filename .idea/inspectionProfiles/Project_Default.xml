@@ -1,0 +1,8 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ADDITIONAL_TAGS" value="matrices_sum,matrices_transposition,multiplication_of_matrix_by_scalar,multiplication_of_matrix_by_matrix,authentication_with_scanner" />
+    </inspection_tool>
+  </profile>
+</component>

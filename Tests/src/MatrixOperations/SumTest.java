@@ -1,10 +1,12 @@
-package Tests.MatrixOperations;
+package MatrixOperations;
 
-import MatrixOperations.Sum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static Tests.resources.toUseOnOperations.MatricesToUseOnSumationTests.*;
+import static toUseOnOperations.MatricesToUseOnSummationTests.correctMatrix3ThatIsNotTheSumOfMatrices1And2;
+import static toUseOnOperations.MatricesToUseOnSummationTests.expectedSumOfMatrix1ByItself;
+import static toUseOnOperations.MatricesToUseOnTests.*;
+
 
 public class SumTest {
 
@@ -23,7 +25,7 @@ public class SumTest {
     public void testSumWrongBothMatrices() throws Exception
     {
         Assertions.assertNotEquals(
-                correctMatrix3ThatIsntTheSumOfMatrices1And2,
+                correctMatrix3ThatIsNotTheSumOfMatrices1And2,
             Sum.sumMatrices(
                     getCorrectMatrix1(),
                     correctMatrix2

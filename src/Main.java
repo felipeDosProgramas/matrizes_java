@@ -1,26 +1,37 @@
-import Menu.OperationCaller;
-import Menu.OperationChooser;
+import Menu.*;
 import Records.Matrix;
 
-import java.lang.reflect.Method;
-import java.util.Optional;
-
 public class Main {
-    public static void executeOperation(){
-        Method operationToExecute = OperationChooser.chooseOperation();
-        OperationCaller operationCallerInstance = new OperationCaller(
-                OperationChooser.getInstance()
-        );
-        Optional<Matrix> operationResult = operationCallerInstance.execute(operationToExecute);
-        if (operationResult.isEmpty())
-            return;
-        System.out.println(operationResult.get());
-    }
+
     public static void main(String[] args) {
         do {
-            executeOperation();
+            executeOperation(
+                    OperationsIdentifiersManager.getOperationIdentifierInstance(),
+                    OperationChooser.getInstance()
+            );
+            OperationsIdentifiersManager.addOperatedObjectsToLogInstance();
             System.out.println("Type 0 to quit, any other number to continue.");
         }
         while (OperationChooser.scanner.nextInt() != 0);
+    }
+
+    private static void executeOperation(OperationIdentifier operationIdentifier, OperationChooser operationChooserInstance){
+        ArgumentsInstancesRepository.setOperationIdentifier(operationIdentifier);
+        new OperationCaller(operationChooserInstance)
+            .execute(
+                OperationChooser.chooseOperation()
+            )
+            .ifPresent(
+                matrix -> printOperationExit(operationIdentifier, matrix)
+            );
+    }
+
+    private static void printOperationExit(OperationIdentifier operationIdentifier, Matrix operationResult){
+        System.out.println(
+                operationIdentifier.getOperationData( "\n")
+        );
+        System.out.println(
+                operationResult
+        );
     }
 }

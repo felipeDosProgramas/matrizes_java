@@ -1,10 +1,11 @@
-package Tests.MatrixOperations;
+package MatrixOperations;
 
-import MatrixOperations.Transposition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static Tests.resources.toUseOnOperations.MatricesToUseOnTranspositionTests.*;
+import static toUseOnOperations.MatricesToUseOnTests.correctMatrix2;
+import static toUseOnOperations.MatricesToUseOnTests.getCorrectMatrix1;
+import static toUseOnOperations.MatricesToUseOnTranspositionTests.transposedMatrix1;
 
 public class TranspositionTest {
 
