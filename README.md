@@ -1,3 +1,49 @@
+# [English](#matrices-exercises-for-java)
+# [Português](#exercícios-de-matrizes-para-java)
+
+## Matrices exercises for Java
+**Taught by [Alessandro Lima](https://www.linkedin.com/in/alessandrofpl/)**
+
+---
+### Matrices sum:
+<p>Develop a program that calculates the sum between two 3X3 matrices, printing the result</p>
+
+### Product between a matrix and a scalar or another matrix:
+<p>Develop a program that calculates the product between a matrix and a scalar number or another matrix </p>
+
+### Matrix based authentication
+<p>Develop a program that verifies if a username and a password are equals between a 6x2 Matrix</p>
+
+### Matrix transposition:
+<p>Develop a code that do a Matrix transposition(the columns become rows and rows become columns)</p>
+<p>ask for the user to insert the matrix's elements, printing on the console the resulted Matrix</p>
+
+
+---
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Exercícios de Matrizes para Java
 **Lecionado pelo professor [Alessandro Lima](https://www.linkedin.com/in/alessandrofpl/)**
 
